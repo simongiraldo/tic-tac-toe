@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="A site about personal shit from Simon">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/tablet.css" media="screen and (min-width: 600px)">
+    <link rel="stylesheet" href="./css/desktop.css" media="screen and (min-width: 800px)">
+</head>
+
+<body>
+    <header>
+        <a href="./index.html">
+            <h1>Tic Tac Toe</h1>
+        </a>
+    </header>
+
+    <main class="container">
+        <select name="difficulty" id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="impossible">Impossible</option>
+            <option value="friend">Play with a friend</option>
+        </select>
+        <section class="board" id="board">
+            <div class="board__position corner">1</div>
+            <div class="board__position edge">2</div>
+            <div class="board__position corner">3</div>
+            <div class="board__position edge">4</div>
+            <div class="board__position center">5</div>
+            <div class="board__position edge">6</div>
+            <div class="board__position corner">7</div>
+            <div class="board__position edge">8</div>
+            <div class="board__position corner">9</div>
+        </section>
+        <button onclick="setDifficulty()">Restart</button>
+    </main>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
