@@ -339,4 +339,3 @@ diffculty.addEventListener('change', setDifficulty);
 setDifficulty();
 
 
-/*  -Dibujar la linea cuando alguien gana con css.  */

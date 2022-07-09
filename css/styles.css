@@ -225,3 +225,18 @@ header a h1 {
         border-color: red;
     }
 }
+
+@media screen and (min-width: 600px){
+    header a h1{
+        font-size: 4rem;
+    }
+    
+    .board {
+        height: 30rem;
+    }
+
+    .board__position {
+        width: 10rem;
+        height: 10rem;
+    }
+}
