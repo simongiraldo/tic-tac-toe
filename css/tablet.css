@@ -1,0 +1,12 @@
+.board__position {
+    width: 10rem;
+    height: 10rem;
+}
+
+header a h1{
+    font-size: 4rem;
+}
+
+.board {
+    height: 30rem;
+}
