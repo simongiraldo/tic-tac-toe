@@ -2,6 +2,7 @@ function setDifficulty() {
     document.getElementById('board').innerHTML = '<div class="board__position board__position1 corner">1</div><div class="board__position board__position2 edge">2</div><div class="board__position board__position3 corner">3</div><div class="board__position board__position4 edge">4</div><div class="board__position board__position5 center">5</div><div class="board__position board__position6 edge">6</div><div class="board__position board__position7 corner">7</div><div class="board__position board__position8 edge">8</div><div class="board__position board__position9 corner">9</div>';
 
     stillPlaying = true;
+    friendCount = 1;
     voidPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, true];
     selectedPositionsU = [];
     selectedPositionsM = [];
@@ -23,7 +24,7 @@ function play(event) {
         modeImpossible(event);
     }
     else if (difficulty.value == 'friend') {
-
+        modeFriend(event);
     }
 
 }
@@ -46,6 +47,32 @@ function machineMove(machine) {
                 validateWin(selectedPositionsM);
             }
         }
+    }
+}
+
+function friendMove(picked, who){
+    who.push(Number(picked.innerText));
+    voidPositions.splice(voidPositions.indexOf(who.reverse()[0]), 1);
+    if(who == selectedPositionsU){
+        picked.innerHTML = "<div class='x'>X</div>";
+    }
+    else if(who == selectedPositionsM){
+        picked.innerHTML = "<div class='o'>O</div>";
+    }
+    picked.removeEventListener('click', play);
+}
+
+function modeFriend(event){
+    if (stillPlaying) {
+        if(friendCount % 2 == 0){
+            friendMove(event.path[0], selectedPositionsM);
+            validateWin(selectedPositionsM);
+        }
+        else {
+            friendMove(event.path[0], selectedPositionsU);
+            validateWin(selectedPositionsU);
+        }
+        friendCount++;
     }
 }
 
@@ -81,7 +108,6 @@ function modeImpossible(event) {
     if (stillPlaying) {
         let machine = impossibleSelection(selectedPositionsU);
         machineMove(machine);
-        
     }
 }
 
@@ -123,69 +149,60 @@ function impossibleSelection(used) {
 }
 
 function setImpossible(x) {
-    let setCorners = [];
-    let setEdges = [];
     let oppCorners, adjCorners, adjEdges, oppEdges;
     let setCenter = 5;
-    for (let i of voidPositions) {
-        if (i % 2 != 0 && i != 5) {
-            setCorners.push(i);
-        }
-        else if (i % 2 == 0) {
-            setEdges.push(i);
-        }
-    }
+
     switch (x) {
         case 1:
-            oppCorners = [setCorners[2]];
-            adjCorners = [setCorners[0], setCorners[1]];
-            oppEdges = [setEdges[2], setEdges[3]];
-            adjEdges = [setEdges[0], setEdges[1]];
+            oppCorners = [9];
+            adjCorners = [3, 7];
+            oppEdges = [6, 8];
+            adjEdges = [2, 4];
             break;
         case 2:
-            oppCorners = [setCorners[2], setCorners[3]];
-            adjCorners = [setCorners[0], setCorners[1]];
-            oppEdges = [setEdges[2]];
-            adjEdges = [setEdges[0], setEdges[1]];
+            oppCorners = [7, 9];
+            adjCorners = [1, 3];
+            oppEdges = [8];
+            adjEdges = [4, 6];
             break;
         case 3:
-            oppCorners = [setCorners[1]];
-            adjCorners = [setCorners[0], setCorners[2]];
-            oppEdges = [setEdges[1], setEdges[3]];
-            adjEdges = [setEdges[0], setEdges[2]];
+            oppCorners = [7];
+            adjCorners = [1, 9];
+            oppEdges = [4, 8];
+            adjEdges = [2, 6];
             break;
         case 4:
-            oppCorners = [setCorners[1], setCorners[3]];
-            adjCorners = [setCorners[0], setCorners[2]];
-            oppEdges = [setEdges[1]];
-            adjEdges = [setEdges[0], setEdges[2]];
+            oppCorners = [3, 9];
+            adjCorners = [1, 7];
+            oppEdges = [8];
+            adjEdges = [2, 8];
             break;
         case 5:
             oppCorners = [1, 3, 7, 9];
             break;
         case 6:
-            oppCorners = [setCorners[0], setCorners[2]];
-            adjCorners = [setCorners[1], setCorners[3]];
-            oppEdges = [setEdges[1]];
-            adjEdges = [setEdges[0], setEdges[2]];
+            oppCorners = [1, 7];
+            adjCorners = [3, 9];
+            oppEdges = [4];
+            adjEdges = [2, 8];
             break;
         case 7:
-            oppCorners = [setCorners[1]];
-            adjCorners = [setCorners[0], setCorners[2]];
-            oppEdges = [setEdges[0], setEdges[2]];
-            adjEdges = [setEdges[1], setEdges[3]];
+            oppCorners = [3];
+            adjCorners = [1, 9];
+            oppEdges = [2, 6];
+            adjEdges = [4, 8];
             break;
         case 8:
-            oppCorners = [setCorners[0], setCorners[1]];
-            adjCorners = [setCorners[2], setCorners[3]];
-            oppEdges = [setEdges[0]];
-            adjEdges = [setEdges[1], setEdges[2]];
+            oppCorners = [1, 3];
+            adjCorners = [7, 9];
+            oppEdges = [2];
+            adjEdges = [4, 6];
             break;
         case 9:
-            oppCorners = [setCorners[0]];
-            adjCorners = [setCorners[1], setCorners[2]];
-            oppEdges = [setEdges[0], setEdges[1]];
-            adjEdges = [setEdges[2], setEdges[3]];
+            oppCorners = [1];
+            adjCorners = [3, 7];
+            oppEdges = [2, 4];
+            adjEdges = [6, 8];
             break;
     }
     return [oppCorners, adjCorners, setCenter, oppEdges, adjEdges];
@@ -318,7 +335,35 @@ function gameOver(who, numbers) {
     }
 
     if(winner){
-        console.log(numbers)
+        if(numbers[1] % 2 == 0){
+            if(numbers[1] == 2){
+                edges[0].innerHTML += '<div class="h-line"></div>';
+            }
+            else if(numbers[1] == 8){
+                edges[3].innerHTML += '<div class="h-line"></div>';
+            }
+            else if(numbers[1] == 4){
+                edges[1].innerHTML += '<div class="v-line"></div>';
+            }
+            else if(numbers[1] == 6){
+                edges[2].innerHTML += '<div class="v-line"></div>';
+            }
+        }
+        else if(numbers[1] == 5){
+            if(numbers[2] == 6){
+                center[0].innerHTML += '<div class="h-line"></div>';
+            }
+            else if(numbers[2] == 8){
+                center[0].innerHTML += '<div class="v-line"></div>';
+            }
+            else if(numbers[2] == 9){
+                center[0].innerHTML += '<div class="d-line1"></div>';
+            }
+            else if(numbers[2] == 7){
+                center[0].innerHTML += '<div class="d-line2"></div>';
+            }
+        }
+        
     }
     setTimeout(function(){
         document.getElementById('board').innerHTML = '<p class="winner" onclick="setDifficulty()">' + who + '</p>';
@@ -332,10 +377,9 @@ let positions = [corners, edges, center];
 
 let voidPositions, selectedPositionsU, selectedPositionsM;
 let where;
+let friendCount;
 let stillPlaying;
 
 let diffculty = document.getElementById('difficulty');
 diffculty.addEventListener('change', setDifficulty);
 setDifficulty();
-
-

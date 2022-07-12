@@ -182,6 +182,41 @@ header a h1 {
     color: whitesmoke;
 }
 
+.h-line {
+    animation-duration: 1s;
+    animation-name: horizontal-line;
+    position: absolute;
+    border-top: solid 0.5rem white;
+    width: 30rem;
+}
+
+.v-line {
+    animation-duration: 1s;
+    animation-name: vertical-line;
+    position: absolute;
+    transform: rotate(90deg);
+    border-top: solid 0.5rem white;
+    width: 30rem;
+}
+
+.d-line1 {
+    animation-duration: 1s;
+    animation-name: diagonal-line1;
+    position: absolute;
+    transform: rotate(45deg);
+    border-top: solid 0.5rem white;
+    width: 30rem;
+}
+
+.d-line2 {
+    animation-duration: 1s;
+    animation-name: diagonal-line2;
+    position: absolute;
+    transform: rotate(135deg);
+    border-top: solid 0.5rem white;
+    width: 30rem;
+}
+
 @keyframes who {
     from {
         font-family: Arial, Helvetica, sans-serif;
@@ -218,19 +253,83 @@ header a h1 {
     from {
         border-color: transparent;
     }
+
     50% {
         border-color: #0053a7;
     }
-    to{
+
+    to {
         border-color: red;
     }
 }
 
-@media screen and (min-width: 600px){
-    header a h1{
+@keyframes horizontal-line {
+    from {
+        position: absolute;
+        border-top: solid 0.5rem white;
+        width: 0rem;
+    }
+
+    to {
+        position: absolute;
+        border-top: solid 0.5rem white;
+        width: 30rem;
+    }
+}
+
+@keyframes vertical-line {
+    from {
+        position: absolute;
+        transform: rotate(90deg);
+        border-top: solid 0.5rem white;
+        width: 0rem;
+    }
+
+    to {
+        position: absolute;
+        transform: rotate(90deg);
+        border-top: solid 0.5rem white;
+        width: 30rem;
+    }
+}
+
+@keyframes diagonal-line1 {
+    from {
+        position: absolute;
+        transform: rotate(45deg);
+        border-top: solid 0.5rem white;
+        width: 0rem;
+    }
+
+    to {
+        position: absolute;
+        transform: rotate(45deg);
+        border-top: solid 0.5rem white;
+        width: 30rem;
+    }
+}
+
+@keyframes diagonal-line2 {
+    from {
+        position: absolute;
+        transform: rotate(135deg);
+        border-top: solid 0.5rem white;
+        width: 0rem;
+    }
+
+    to {
+        position: absolute;
+        transform: rotate(135deg);
+        border-top: solid 0.5rem white;
+        width: 30rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    header a h1 {
         font-size: 4rem;
     }
-    
+
     .board {
         height: 30rem;
     }
