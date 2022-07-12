@@ -10,6 +10,7 @@ function setDifficulty() {
         for (let j in i) {
             if (i[j].innerText in voidPositions) {
                 i[j].addEventListener('click', play);
+                i[j].addEventListener('touchenter', play);
             }
         }
     }
