@@ -9,12 +9,7 @@ function setDifficulty() {
     for (let i of positions) {
         for (let j in i) {
             if (i[j].innerText in voidPositions) {
-                if(screen. width < 800){
-                    i[j].addEventListener('touchstart', play);
-                }
-                else {
-                    i[j].addEventListener('click', play);
-                }
+                i[j].addEventListener('touchstart', play);
             }
         }
     }
