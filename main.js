@@ -9,7 +9,7 @@ function setDifficulty() {
     for (let i of positions) {
         for (let j in i) {
             if (i[j].innerText in voidPositions) {
-                i[j].addEventListener('touchstart', play, {passive: true});
+                i[j].addEventListener('click', play);
             }
         }
     }
