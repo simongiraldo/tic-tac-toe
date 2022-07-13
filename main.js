@@ -9,8 +9,12 @@ function setDifficulty() {
     for (let i of positions) {
         for (let j in i) {
             if (i[j].innerText in voidPositions) {
-                i[j].addEventListener('click', play);
-                i[j].addEventListener('touchstart', play);
+                if(screen. width < 800){
+                    i[j].addEventListener('touchstart', play);
+                }
+                else {
+                    i[j].addEventListener('click', play);
+                }
             }
         }
     }
@@ -22,6 +26,7 @@ function play(event) {
         modeEasy(event);
     }
     else if (difficulty.value == 'impossible') {
+        console.log(event);
         modeImpossible(event);
     }
     else if (difficulty.value == 'friend') {
